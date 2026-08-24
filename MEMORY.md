@@ -56,3 +56,10 @@ Phase 0 is now fully complete (Tickets 0.1-0.8 all shipped and verified). Next: 
   20260824000000_fix_profiles_recursion.sql: added an is_admin() SECURITY DEFINER function
   (bypasses RLS, breaks the recursion) and replaced all 22 inline profiles subqueries across
   every table's admin policies with is_admin() calls.
+- Shipped: Ticket 1.2 — Admin module management at /admin/courses/[id]/modules (nested
+  route, Server Component list + Server Actions for create/update/delete/reorder, up/down
+  swap buttons, auto-assigned order_index on create). Added "Manage Modules" button to
+  course cards.
+- Decided: Nested route (/admin/courses/[id]/modules) over inline on courses page — modules
+  are scoped to a course, URL reflects that relationship. Reorder uses two sequential update()
+  calls (not a transaction) — acceptable for solo-admin tool; if second fails, admin retries.
