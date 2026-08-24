@@ -27,12 +27,12 @@ export default async function Header() {
               Dashboard
             </Link>
             <span className="text-xs text-atz-muted">{user.email}</span>
-            <Link
+            <a
               href="/auth/signout"
               className="bg-atz-gold text-atz-navy px-4 py-2 rounded-lg text-sm font-semibold no-underline hover:bg-atz-gold-dark hover:text-white transition-colors"
             >
               Sign Out
-            </Link>
+            </a>
           </>
         ) : (
           <Link
