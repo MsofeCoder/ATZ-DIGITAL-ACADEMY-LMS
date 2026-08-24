@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { updateModule, deleteModule, reorderModules } from "./actions";
 
 type Module = {
@@ -31,6 +32,7 @@ export default function ModuleCard({
 }: Props) {
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   async function handleUpdate(formData: FormData) {
     setError(null);
@@ -39,6 +41,7 @@ export default function ModuleCard({
       setError(result.error);
     } else {
       setEditing(false);
+      router.refresh();
     }
   }
 
@@ -51,6 +54,7 @@ export default function ModuleCard({
 
   async function handleReorder(targetId: string) {
     await reorderModules(mod.id, targetId, courseId);
+    router.refresh();
   }
 
   if (editing) {
