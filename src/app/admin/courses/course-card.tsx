@@ -89,6 +89,12 @@ export default function CourseCard({ course }: { course: Course }) {
         <p className="mt-1 text-sm text-atz-slate">{course.description}</p>
       )}
       <div className="mt-4 flex gap-2">
+        <a
+          href={`/admin/courses/${course.id}/modules`}
+          className="px-4 py-2 rounded-lg text-sm font-medium text-atz-navy bg-atz-gold hover:bg-atz-gold-dark transition-colors"
+        >
+          Manage Modules
+        </a>
         <button
           onClick={() => setEditing(true)}
           className="px-4 py-2 rounded-lg text-sm font-medium text-atz-slate bg-atz-bg-alt hover:bg-atz-bg transition-colors"
