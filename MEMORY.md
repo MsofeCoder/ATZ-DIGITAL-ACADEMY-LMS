@@ -45,3 +45,13 @@ Running log of features shipped and decisions made. Newest entries at the bottom
   links, verifying "deferred" branch work, Supabase dual redirect config).
 
 Phase 0 is now fully complete (Tickets 0.1-0.8 all shipped and verified). Next: Phase 1.
+
+## 2026-08-24
+- Shipped: Ticket 1.1 — Admin course management. Single page at /admin/courses (Server
+  Component list + create form, Client Component for edit/delete toggle). Server Actions for
+  all mutations (create, update, delete) with revalidatePath. Updated /admin dashboard with
+  "Manage Courses" link.
+- Decided: Single-page routing over separate /new and /[id]/edit routes — course model has
+  only 2 fields, separate routes add navigation complexity with no benefit. Created
+  create-form.tsx as a small Client Component to use useActionState for create-form error
+  display (Server Components can't use useState for inline errors).
