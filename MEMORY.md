@@ -21,3 +21,21 @@ Running log of features shipped and decisions made. Newest entries at the bottom
 - Fixed: Header always showed "Sign In" regardless of auth state — was a static Server Component. Extracted to `src/components/header.tsx` as an async Server Component that reads session via `createClient()` from supabase-server.ts. Conditionally renders Sign In (logged out) or Dashboard link + email + Sign Out (logged in).
 - Fixed: `src/middleware.ts` was accidentally deleted by the middleware-to-proxy codemod run on a scratch branch. Restored from git. Removed orphaned `src/proxy.ts`.
 - Decided: Deferred middleware-to-proxy migration — codemod works (renames `middleware` to `proxy`, moves file), but no functional change. Next.js 16.3.2 still supports middleware. Revisit when Next.js drops middleware support.
+
+## 2026-08-24
+- Shipped: Ticket 0.7 — deployed to https://atz-digital-academy-lms.vercel.app. Fixed OAuth
+  redirect chain (NEXT_PUBLIC_SUPABASE_URL was set to the app's own domain instead of the
+  Supabase project URL; NEXT_PUBLIC_SITE_URL was missing/misconfigured; Supabase Auth Site
+  URL and Redirect URLs were pointing to localhost/empty). Restored src/middleware.ts, which
+  had been silently deleted by an earlier middleware-to-proxy codemod experiment believed
+  deferred but had actually reached master. Added session-aware header.tsx Server Component.
+  Fixed sign-out: cookie clearing needed explicit maxAge:0 (not just an empty value), and the
+  Sign Out control needed to be a plain <a> tag instead of next/link's <Link> to force a full
+  page navigation past Next.js's Router Cache, which was serving a stale signed-in header.
+- Decided: middleware-to-proxy migration stays deferred. Going forward, verify any "deferred"
+  branch work never lands on master via git log before trusting it's inactive. Manually
+  promoted atzdigitalacademy@gmail.com to role='admin' in Supabase since no self-serve admin
+  path exists yet (per Ticket 0.4's original decision).
+
+Phase 0 is now fully complete (Tickets 0.1-0.7 all shipped and verified). Next: Ticket 0.8
+(AGENTS.md) to close out Phase 0 entirely.
