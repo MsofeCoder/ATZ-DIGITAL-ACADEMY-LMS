@@ -37,5 +37,11 @@ Running log of features shipped and decisions made. Newest entries at the bottom
   promoted atzdigitalacademy@gmail.com to role='admin' in Supabase since no self-serve admin
   path exists yet (per Ticket 0.4's original decision).
 
-Phase 0 is now fully complete (Tickets 0.1-0.7 all shipped and verified). Next: Ticket 0.8
-(AGENTS.md) to close out Phase 0 entirely.
+## 2026-08-24
+- Shipped: Ticket 0.8 — AGENTS.md created at repo root. Includes folder structure, Supabase
+  schema (9 tables), ATZ brand Tailwind tokens, auth architecture, role system, environment
+  variables, build commands, and a "Known gotchas" section documenting lessons from Ticket 0.7
+  (NEXT_PUBLIC_* build-time baking, cookie deletion requiring maxAge:0, plain <a> for auth
+  links, verifying "deferred" branch work, Supabase dual redirect config).
+
+Phase 0 is now fully complete (Tickets 0.1-0.8 all shipped and verified). Next: Phase 1.
