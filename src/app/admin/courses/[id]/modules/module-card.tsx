@@ -215,6 +215,12 @@ export default function ModuleCard({
             >
               Edit
             </button>
+            <a
+              href={`/admin/courses/${courseId}/modules/${mod.id}/materials`}
+              className="px-4 py-2 rounded-lg text-sm font-medium text-atz-gold bg-atz-navy hover:bg-atz-slate transition-colors"
+            >
+              Materials
+            </a>
             <form action={handleDelete}>
               <input type="hidden" name="id" value={mod.id} />
               <input type="hidden" name="course_id" value={courseId} />
