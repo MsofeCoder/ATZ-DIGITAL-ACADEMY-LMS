@@ -39,6 +39,13 @@ export default async function AdminEnrollmentsPage({
     email: emailMap.get(p.id) ?? "",
   }));
 
+  console.log(
+    "[enrollments/page] selectedCourseId:",
+    selectedCourseId,
+    "| enrollment user_ids:",
+    (enrollments ?? []).map((e) => e.user_id)
+  );
+
   return (
     <EnrollmentClient
       profiles={profilesWithEmail}

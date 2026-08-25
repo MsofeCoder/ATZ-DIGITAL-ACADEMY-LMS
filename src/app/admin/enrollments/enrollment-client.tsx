@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useActionState } from "react";
 import { useRouter } from "next/navigation";
 import { enrollUser } from "./actions";
 
@@ -38,6 +37,7 @@ export default function EnrollmentClient({
     type: "success" | "error";
     text: string;
   } | null>(null);
+  const [pendingId, setPendingId] = useState<string | null>(null);
 
   const enrolledUserIds = new Set(
     enrollments
@@ -45,20 +45,19 @@ export default function EnrollmentClient({
       .map((e) => e.user_id)
   );
 
-  const [, formAction, pending] = useActionState(
-    async (_prev: { error: string | null }, formData: FormData) => {
-      setMessage(null);
-      const result = await enrollUser(formData);
-      if (result?.error) {
-        setMessage({ type: "error", text: result.error });
-        return { error: result.error };
-      }
+  async function handleEnroll(formData: FormData) {
+    const userId = formData.get("user_id") as string;
+    setMessage(null);
+    setPendingId(userId);
+    const result = await enrollUser(formData);
+    setPendingId(null);
+    if (result?.error) {
+      setMessage({ type: "error", text: result.error });
+    } else {
       setMessage({ type: "success", text: "Student enrolled successfully." });
       router.refresh();
-      return { error: null };
-    },
-    { error: null }
-  );
+    }
+  }
 
   function handleCourseChange(value: string) {
     setSelectedCourse(value);
@@ -178,7 +177,7 @@ export default function EnrollmentClient({
                             Already enrolled
                           </span>
                         ) : (
-                          <form action={formAction} className="inline">
+                          <form action={handleEnroll} className="inline">
                             <input
                               type="hidden"
                               name="user_id"
@@ -191,10 +190,12 @@ export default function EnrollmentClient({
                             />
                             <button
                               type="submit"
-                              disabled={pending}
+                              disabled={pendingId !== null}
                               className="px-4 py-2 rounded-lg text-sm font-medium text-atz-navy bg-atz-gold hover:bg-atz-gold-dark transition-colors disabled:opacity-50"
                             >
-                              {pending ? "Enrolling..." : "Enroll"}
+                              {pendingId === profile.id
+                                ? "Enrolling..."
+                                : "Enroll"}
                             </button>
                           </form>
                         )}
