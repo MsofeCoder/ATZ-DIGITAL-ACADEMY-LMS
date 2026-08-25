@@ -74,3 +74,6 @@ Phase 0 is now fully complete (Tickets 0.1-0.8 all shipped and verified). Next: 
 
 ## 2026-08-25
 - Fixed: Ticket 1.4 enrollment page showed no users — query selected `email` from `profiles` table which has no `email` column (PostgREST 400 error → null data → empty list). Fixed by removing `email` from profiles select and fetching emails from `auth.users` via `supabaseAdmin.auth.admin.listUsers()`, then merging client-side
+
+## 2026-08-25
+- Fixed: Ticket 1.4 enrollment status not updating in UI after successful enroll — added `router.refresh()` after successful Server Action, same root cause pattern as Ticket 1.2's reorder bug (revalidatePath invalidates server cache but client holds stale props until refresh triggers re-fetch)

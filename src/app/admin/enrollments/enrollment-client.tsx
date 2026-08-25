@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useActionState } from "react";
+import { useRouter } from "next/navigation";
 import { enrollUser } from "./actions";
 
 type Profile = {
@@ -31,6 +32,7 @@ export default function EnrollmentClient({
   enrollments: Enrollment[];
   selectedCourseId: string;
 }) {
+  const router = useRouter();
   const [selectedCourse, setSelectedCourse] = useState(selectedCourseId);
   const [message, setMessage] = useState<{
     type: "success" | "error";
@@ -52,6 +54,7 @@ export default function EnrollmentClient({
         return { error: result.error };
       }
       setMessage({ type: "success", text: "Student enrolled successfully." });
+      router.refresh();
       return { error: null };
     },
     { error: null }
