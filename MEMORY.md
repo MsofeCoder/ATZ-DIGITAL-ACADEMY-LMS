@@ -62,3 +62,8 @@ Phase 0 is now fully complete (Tickets 0.1-0.8 all shipped and verified). Next: 
   resolves — revalidatePath() alone marks the server cache stale but doesn't force the
   client's Router Cache to refetch, same root cause as the Ticket 0.7 sign-out bug. Noted a
   minor scroll-position UX quirk after reorder to revisit in Ticket 1.7.
+
+## 2026-08-25
+- Shipped: Ticket 1.3 — admin materials management (nested route under module, create/delete Server Actions, file_type badge display)
+- Shipped: RLS recursion fix — replaced inline profiles subqueries in admin policies (courses, modules, materials, quizzes, quiz_questions, enrollments, quiz_attempts, progress) with a single is_admin() SECURITY DEFINER function, set search_path = public per the known Supabase gotcha
+- Decided: Centralized admin-role RLS checks into is_admin() instead of repeating the subquery pattern per-table, to prevent this recursion bug recurring as new tables get policies in Phase 2
