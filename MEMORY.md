@@ -71,3 +71,6 @@ Phase 0 is now fully complete (Tickets 0.1-0.8 all shipped and verified). Next: 
 ## 2026-08-25
 - Shipped: Ticket 1.4 — admin manual enrollment (profiles list, enroll action, enrolled-status indicator per course)
 - Decided: unique(user_id, course_id) constraint already existed in initial migration (20260823000000_initial_schema.sql:122), so no new migration needed — the DB-level duplicate guard was already in place from Phase 0
+
+## 2026-08-25
+- Fixed: Ticket 1.4 enrollment page showed no users — query selected `email` from `profiles` table which has no `email` column (PostgREST 400 error → null data → empty list). Fixed by removing `email` from profiles select and fetching emails from `auth.users` via `supabaseAdmin.auth.admin.listUsers()`, then merging client-side
