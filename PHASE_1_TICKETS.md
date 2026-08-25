@@ -53,7 +53,7 @@ in Phase 0. No quizzes/progress yet (Phase 3), no video *playback* polish beyond
 
 ---
 
-## Ticket 1.4 — Admin: Manual enrollment
+## Ticket 1.4 — Admin: Manual enrollment (DONE)
 **Do:**
 - Admin page listing all `profiles` (i.e., everyone who has ever signed in via Google OAuth)
 - Admin can select a student and enroll them into a course (creates an `enrollments` row,
@@ -64,9 +64,9 @@ in Phase 0. No quizzes/progress yet (Phase 3), no video *playback* polish beyond
   confirming payment in the registration dashboard").
 
 **Acceptance criteria:**
-- [ ] Admin can see a list of all signed-up users (even if not yet enrolled in anything)
-- [ ] Admin can enroll a selected user into a selected course
-- [ ] Enrolling the same user in the same course twice doesn't create duplicate rows
+- [x] Admin can see a list of all signed-up users (even if not yet enrolled in anything)
+- [x] Admin can enroll a selected user into a selected course
+- [x] Enrolling the same user in the same course twice doesn't create duplicate rows
 
 ---
 

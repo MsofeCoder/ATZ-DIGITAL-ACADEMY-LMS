@@ -67,3 +67,7 @@ Phase 0 is now fully complete (Tickets 0.1-0.8 all shipped and verified). Next: 
 - Shipped: Ticket 1.3 — admin materials management (nested route under module, create/delete Server Actions, file_type badge display)
 - Shipped: RLS recursion fix — replaced inline profiles subqueries in admin policies (courses, modules, materials, quizzes, quiz_questions, enrollments, quiz_attempts, progress) with a single is_admin() SECURITY DEFINER function, set search_path = public per the known Supabase gotcha
 - Decided: Centralized admin-role RLS checks into is_admin() instead of repeating the subquery pattern per-table, to prevent this recursion bug recurring as new tables get policies in Phase 2
+
+## 2026-08-25
+- Shipped: Ticket 1.4 — admin manual enrollment (profiles list, enroll action, enrolled-status indicator per course)
+- Decided: unique(user_id, course_id) constraint already existed in initial migration (20260823000000_initial_schema.sql:122), so no new migration needed — the DB-level duplicate guard was already in place from Phase 0
